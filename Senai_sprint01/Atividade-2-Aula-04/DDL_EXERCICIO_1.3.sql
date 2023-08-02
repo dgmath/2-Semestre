@@ -1,0 +1,63 @@
+--CRIAR BANCO DE DADOS DDL
+CREATE DATABASE Exercicio_1_3;
+
+USE Exercicio_1_3;
+
+CREATE TABLE Clinica
+(
+	IdClinica INT PRIMARY KEY IDENTITY,
+	Endereco VARCHAR(30) NOT NULL
+)
+
+CREATE TABLE Raca
+(
+	IdRaca INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(20) NOT NULL
+)
+
+CREATE TABLE TipoPet
+(
+	IdTipoPet INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(15) NOT NULL
+)
+
+CREATE TABLE Dono
+(
+	IdDono INT PRIMARY KEY IDENTITY,
+	Nome VARCHAR(15) NOT NULL
+)
+
+---------------------------------------------
+--COM CHAVE ESTRANGEIRA
+CREATE TABLE Veterinario
+(
+	IdVeterinario INT PRIMARY KEY IDENTITY,
+	IdClinica INT FOREIGN KEY REFERENCES Clinica(IdClinica),
+	Nome VARCHAR(20) NOT NULL 
+)
+
+CREATE TABLE Pets
+(
+	IdPets INT PRIMARY KEY IDENTITY,
+	IdTipoPet INT FOREIGN KEY REFERENCES TipoPet(IdTipoPet),
+	IdRaca INT FOREIGN KEY REFERENCES Raca(IdRaca),
+	IdDono INT FOREIGN KEY REFERENCES Dono(IdDono),
+	Nome VARCHAR(20) NOT NULL,
+	DataNascimento VARCHAR(8) NOT NULL
+)
+
+CREATE TABLE Atendimento
+(
+	IdAtendimento INT PRIMARY KEY IDENTITY,
+	IdPets INT FOREIGN KEY REFERENCES PetS(IdPets),
+	IdVeterinario INT FOREIGN KEY REFERENCES Veterinario(IdVeterinario),
+	Registro VARCHAR(15) NOT NULL UNIQUE
+)
+---------------------------------------------
+SELECT * FROM Clinica
+SELECT * FROM Raca
+SELECT * FROM TipoPet
+SELECT * FROM Veterinario
+SELECT * FROM Dono
+SELECT * FROM Pets
+SELECT * FROM Atendimento
