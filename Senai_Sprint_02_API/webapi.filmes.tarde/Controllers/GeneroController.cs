@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using webapi.filmes.tarde.Domains;
 using webapi.filmes.tarde.Interfaces;
 using webapi.filmes.tarde.Repositories;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace webapi.filmes.tarde.Controllers
 {
@@ -41,8 +42,8 @@ namespace webapi.filmes.tarde.Controllers
         /// Endpoint que acessa o metodo de listar os generos
         /// </summary>
         /// <returns>Lista de generos e um statuscode</returns>
-        [HttpGet]   
-        public IActionResult Get() 
+        [HttpGet]
+        public IActionResult Get()
         {
             try
             {
@@ -60,6 +61,27 @@ namespace webapi.filmes.tarde.Controllers
             }
         }
 
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+               GeneroDomain generoEncontrado = _generoRepository.BuscarPorId(id);
+
+                if (generoEncontrado == null)
+                {
+                    return NotFound("O genero buscado nao foi encontrado");
+                }
+
+                return Ok(generoEncontrado);
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+        }
 
 
         /// <summary>
@@ -82,6 +104,69 @@ namespace webapi.filmes.tarde.Controllers
             catch (Exception erro)
             {
                 //Retorna o status code BadRequest (400) e a mensagem de erros
+                return BadRequest(erro.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _generoRepository.Deletar(id);
+
+                return StatusCode(204, id);
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, GeneroDomain genero)
+        {
+            try
+            {
+                _generoRepository.AtualizarIdUrl(id, genero);
+
+                return Ok(genero);
+            }
+            catch (Exception erro)
+            {
+
+                return BadRequest(erro.Message); 
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Put(GeneroDomain genero)
+        {
+            try
+            {
+                GeneroDomain generoBuscado = _generoRepository.BuscarPorId(genero.IdGenero);
+
+                if (generoBuscado != null)
+                {
+                    try
+                    {
+                        _generoRepository.AtualizarIdCorpo(genero);
+
+                        return NoContent();
+                    }
+
+                    catch (Exception erro)
+                    {
+
+                        return BadRequest(erro.Message);
+                    }
+                    
+                }
+                 return NotFound("Genero não encontrado");
+            }
+            catch (Exception erro)
+            {
                 return BadRequest(erro.Message);
             }
         }
