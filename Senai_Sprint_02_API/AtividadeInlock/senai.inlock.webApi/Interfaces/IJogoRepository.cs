@@ -4,7 +4,6 @@ namespace senai.inlock.webApi.Interfaces
 {
     public interface IJogoRepository
     {
-
         void CadastrarJogo(JogoDomain novoJogo);
 
         List<JogoDomain> ListarJogos();
