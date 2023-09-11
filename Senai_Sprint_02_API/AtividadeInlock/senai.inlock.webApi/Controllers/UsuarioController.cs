@@ -46,7 +46,7 @@ namespace senai.inlock.webApi.Controllers
 
                     new Claim(ClaimTypes.Role,usuarioEncontrado.IdTipoUsuario.ToString()),
 
-                    new Claim("Claim Personalizada", "Valor Personalizado")
+                    //new Claim("Claim Personalizada", "Valor Personalizado")
 
                 };
 
@@ -60,10 +60,10 @@ namespace senai.inlock.webApi.Controllers
                 var token = new JwtSecurityToken
                 (
                     //Emissor do token
-                    issuer: "webapi.filmes",
+                    issuer: "senai.inlock.webApi",
 
                     //destinatario
-                    audience: "webapi.filmes",
+                    audience: "senai.inlock.webApi",
 
                     //dados definidos nas claims (Payload)
                     claims: claims,
