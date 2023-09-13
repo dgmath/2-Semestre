@@ -48,7 +48,7 @@ namespace senai.inlock.webApi.Repositories
                         {
                             IdEstudio = Convert.ToInt32(rdr["IdEstudio"]),
 
-                            Nome = rdr["nomeEstudio"].ToString()
+                            Nome = rdr["Nome"].ToString()
 
                         };
 
@@ -69,9 +69,11 @@ namespace senai.inlock.webApi.Repositories
 
                 conEstudios.Open();
 
+                SqlDataReader rdrEstudio;
+
                 using (SqlCommand cmd = new SqlCommand(querySelectAll,conEstudios))
                 {
-                    SqlDataReader rdrEstudio = cmd.ExecuteReader();
+                    rdrEstudio = cmd.ExecuteReader();
 
                     while (rdrEstudio.Read())
                     {
@@ -91,11 +93,13 @@ namespace senai.inlock.webApi.Repositories
 
                             conJogos.Open();
 
+                            SqlDataReader readerJogos;
+
                             using (SqlCommand cmdJogos = new SqlCommand(querySelectAllJogos, conJogos))
                             {
                                 cmdJogos.Parameters.AddWithValue("@IdEstudio", estudio.IdEstudio);
 
-                                SqlDataReader readerJogos = cmd.ExecuteReader();
+                                readerJogos = cmd.ExecuteReader();
 
                                 while (readerJogos.Read())
                                 {

@@ -19,7 +19,7 @@ namespace senai.inlock.webApi.Controllers
             _estudioRepository = new EstudioRepository();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("ListarTodos")]
         public IActionResult Get()
         {
             try
