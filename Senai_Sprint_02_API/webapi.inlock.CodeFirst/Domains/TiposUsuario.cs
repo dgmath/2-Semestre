@@ -7,10 +7,9 @@ namespace webapi.inlock.CodeFirst.Domains
     public class TiposUsuario
     {
         [Key]
-
         public Guid IdTipoUsuario { get; set; } = Guid.NewGuid();
 
-        [Column(TypeName = "VACHAR(100)")]
+        [Column(TypeName = "VARCHAR(100)")]
         [Required(ErrorMessage = "O Tipo de Usuario é obrigatorio")]
         public string? Titulo { get; set; }
     }
