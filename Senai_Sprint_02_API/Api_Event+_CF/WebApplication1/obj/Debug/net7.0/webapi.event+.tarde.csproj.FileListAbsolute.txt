@@ -80,3 +80,5 @@ C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_02_API\Api_Event+_CF\WebApp
 C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_02_API\Api_Event+_CF\WebApplication1\obj\Debug\net7.0\webapi.event+.tarde.pdb
 C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_02_API\Api_Event+_CF\WebApplication1\obj\Debug\net7.0\webapi.event+.tarde.genruntimeconfig.cache
 C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_02_API\Api_Event+_CF\WebApplication1\obj\Debug\net7.0\ref\webapi.event+.tarde.dll
+C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_02_API\Api_Event+_CF\WebApplication1\bin\Debug\net7.0\webapi.event+.tarde.xml
+C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_02_API\Api_Event+_CF\WebApplication1\obj\Debug\net7.0\webapi.event+.tarde.xml

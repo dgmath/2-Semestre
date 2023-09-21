@@ -12,14 +12,22 @@ namespace webapi.event_.tarde.Repositories
         { 
             _eventContext= new EventContext();
         } 
-        public void Atualizar(Guid id, Guid tipoUsuario)
+        public void Atualizar(Guid id, TipoUsuario tipoUsuario)
         {
-            throw new NotImplementedException();
+            TipoUsuario tipoUsuarioBuscado = _eventContext.TipoUsuario.FirstOrDefault(e => e.IdTipoUsuario == id)!;
+
+            if (tipoUsuarioBuscado != null)
+            {
+                tipoUsuarioBuscado.Titulo = tipoUsuario.Titulo;
+            }
+            _eventContext.TipoUsuario.Update(tipoUsuarioBuscado);
+
+            _eventContext.SaveChanges();
         }
 
         public TipoUsuario BuscarPorId(Guid id)
         {
-            throw new NotImplementedException();
+            return _eventContext.TipoUsuario.FirstOrDefault(e => e.IdTipoUsuario == id)!;
         }
 
         public void Cadastrar(TipoUsuario tipoUsuario)
@@ -39,12 +47,36 @@ namespace webapi.event_.tarde.Repositories
 
         public void Deletar(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TipoUsuario tUsuarioBuscado = _eventContext.TipoUsuario.Find(id)!;
+
+                if (tUsuarioBuscado != null)
+                {
+                    _eventContext.TipoUsuario.Remove(tUsuarioBuscado);
+                }
+
+                _eventContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public List<TipoUsuario> Listar()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _eventContext.TipoUsuario.ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace webapi.event_.tarde.Controllers
             _tipoUsuarioRepository = new TipoUsuarioRepository();
         }
 
-        [HttpPost]
+        [HttpPost("Cadastrar")]
         public IActionResult Post(TipoUsuario tipoUsuario)
         {
             try
@@ -26,6 +26,69 @@ namespace webapi.event_.tarde.Controllers
                 _tipoUsuarioRepository.Cadastrar(tipoUsuario);
 
                 return StatusCode(201);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("DeletarPorId")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _tipoUsuarioRepository.Deletar(id);
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("ListarTodos")]
+        public IActionResult Get()
+        {
+            try
+            {
+                List<TipoUsuario> listaUsuario = _tipoUsuarioRepository.Listar();
+
+                return Ok(listaUsuario);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("BuscarPorId")]
+
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_tipoUsuarioRepository.BuscarPorId(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+
+        [HttpPut("Atualizar")]
+
+        public IActionResult Put(Guid id, TipoUsuario tipoUsuario)
+        {
+            try
+            {
+                _tipoUsuarioRepository.Atualizar(id, tipoUsuario);
+
+                return NoContent();
             }
             catch (Exception e)
             {

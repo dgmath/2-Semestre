@@ -9,7 +9,7 @@ namespace webapi.event_tarde.Domains
     public class Usuario
     {
         [Key]
-        public Guid Idusuario { get; set; } = Guid.NewGuid();
+        public Guid IdUsuario { get; set; } = Guid.NewGuid();
 
         [Column(TypeName = "VARCHAR(100)")]
         [Required(ErrorMessage = "Nome é obrigatório!")]

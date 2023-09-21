@@ -23,35 +23,40 @@ namespace webapi.event_.tarde.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginViewModel logaUsuario)
+        public IActionResult Login(LoginViewModel logarUsuario)
         {
             try
             {
-                Usuario usuarioBuscado = _usuarioRepository.UsuarioBuscarPorEmailSenha(logaUsuario.Email!, logaUsuario.Senha!);
+                Usuario usuarioBuscado = _usuarioRepository.BuscarPorEmailSenha(logarUsuario.Email!, logarUsuario.Senha!);
+
                 if (usuarioBuscado == null)
                 {
                     return StatusCode(401, "Email ou Senha inválidos");
                 }
 
+                //Lógica para o token
+
                 var claims = new[]
                 {
-                    new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
-                    new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email, usuarioBuscado.Email!)
+                    new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email!),
+                    new Claim(JwtRegisteredClaimNames.Name,usuarioBuscado.Nome!),
+                    new Claim(JwtRegisteredClaimNames.Jti,usuarioBuscado.IdUsuario.ToString()),
+                    new Claim(ClaimTypes.Role, usuarioBuscado.TipoUsuario!.Titulo!)
                 };
 
-                var Key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("event-key-webapi"));
+                var Key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("projeto-event-webapi-key-autenticacao"));
 
                 var creds = new SigningCredentials(Key, SecurityAlgorithms.HmacSha256);
 
                 var token = new JwtSecurityToken
                 (
-                    issuer: "webapi-event+",
+                    issuer: "webapi.event+.tarde",
 
-                    audience: "webapi-event+",
+                    audience: "webapi.event+.tarde",
 
                     claims: claims,
 
-                    expires: DateTime.UtcNow.AddMinutes(3),
+                    expires: DateTime.Now.AddMinutes(5),
 
                     signingCredentials: creds
                 );

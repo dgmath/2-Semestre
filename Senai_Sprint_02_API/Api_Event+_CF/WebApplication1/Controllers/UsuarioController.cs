@@ -13,7 +13,7 @@ namespace webapi.event_.tarde.Controllers
     {
         private IUsuarioRepository _usuarioRepository { get; set; }
 
-        public UsuarioController() 
+        public UsuarioController()
         {
             _usuarioRepository = new UsuarioRepository();
         }
@@ -33,5 +33,48 @@ namespace webapi.event_.tarde.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        public IActionResult GetById(Guid id)
+        {
+            try
+            {
+                return Ok(_usuarioRepository.BuscarPorId(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("ListarTodos")]
+        public IActionResult Get()
+        {
+            try
+            {
+                List<Usuario> listaUsuario = _usuarioRepository.Listar();
+
+                return Ok(listaUsuario);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("BuscarPorEmaileSenha")]
+        public IActionResult Get(string email,string senha)
+        {
+            try
+            {
+                return Ok(_usuarioRepository.BuscarPorEmailSenha(email, senha));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
     }
 }

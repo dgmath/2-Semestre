@@ -8,7 +8,7 @@ namespace webapi.event_.tarde.Contexts
         public DbSet<TipoUsuario> TipoUsuario { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<TipoEvento> TipoEvento { get; set; }
-        public DbSet<Evento> Eventos { get; set; }
+        public DbSet<Evento> Evento { get; set; }
         public DbSet<Instituicao> Instituicao { get; set; }
         public DbSet<PresencaEvento> PresencaEventos { get; set; }
 

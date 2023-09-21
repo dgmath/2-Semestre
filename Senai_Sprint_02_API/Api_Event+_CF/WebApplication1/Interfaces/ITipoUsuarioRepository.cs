@@ -12,6 +12,6 @@ namespace webapi.event_.tarde.Interfaces
 
         TipoUsuario BuscarPorId(Guid id);
 
-        void Atualizar(Guid id, Guid tipoUsuario);
+        void Atualizar(Guid id, TipoUsuario tipoUsuario);
     }
 }

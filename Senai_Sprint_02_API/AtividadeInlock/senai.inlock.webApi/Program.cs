@@ -48,8 +48,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "Inlock Web Api",
-        Description = "API para gerenciamento de Jogos - Atividade da Sprint 2 - Backend API ",
+        Title = "Api Event+",
+        Description = "API para gerenciamento de Eventos - Atividade da Sprint 2 - Backend API ",
         Contact = new OpenApiContact
         {
             Name = "Matheus Dias",

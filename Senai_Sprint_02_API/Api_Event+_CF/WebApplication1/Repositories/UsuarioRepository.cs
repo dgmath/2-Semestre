@@ -20,7 +20,7 @@ namespace webapi.event_.tarde.Repositories
                 Usuario usuarioBuscado = _eventContext.Usuario
                     .Select(u => new Usuario 
                     { 
-                        Idusuario = u.Idusuario,
+                        IdUsuario = u.IdUsuario,
                         Nome = u.Nome,
                         Email= u.Email,
                         
@@ -30,7 +30,7 @@ namespace webapi.event_.tarde.Repositories
                             Titulo = u.TipoUsuario!.Titulo
                         }
 
-                    }).FirstOrDefault(u => u.Idusuario == id)!;
+                    }).FirstOrDefault(u => u.IdUsuario == id)!;
 
                 return usuarioBuscado;
             }
@@ -58,11 +58,25 @@ namespace webapi.event_.tarde.Repositories
             }
         }
 
-        public Usuario UsuarioBuscarPorEmailSenha(string email, string senha)
+        public Usuario BuscarPorEmailSenha(string email, string senha)
         {
             try
             {
-                Usuario usuarioBuscado = _eventContext.Usuario.FirstOrDefault(u => u.Email == email)!;
+                Usuario usuarioBuscado = _eventContext.Usuario
+                    .Select(u => new Usuario
+                    {
+                        IdUsuario = u.IdUsuario,
+                        Nome = u.Nome,
+                        Email = u.Email,
+                        Senha = u.Senha,
+
+                        TipoUsuario = new TipoUsuario
+                        {
+                            IdTipoUsuario = u.IdTipoUsuario,
+                            Titulo = u.TipoUsuario!.Titulo
+                        }
+
+                    }).FirstOrDefault(u => u.Email == email)!;
 
                 if (usuarioBuscado != null)
                 {
@@ -76,6 +90,19 @@ namespace webapi.event_.tarde.Repositories
                 return null;
 
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Usuario> Listar()
+        {
+            try
+            {
+                return _eventContext.Usuario.ToList();
             }
             catch (Exception)
             {

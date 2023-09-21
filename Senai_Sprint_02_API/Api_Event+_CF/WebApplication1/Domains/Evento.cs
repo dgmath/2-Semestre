@@ -27,7 +27,7 @@ namespace webapi.event_tarde.Domains
         public Guid IdTipoEvento { get; set; }
 
         [ForeignKey(nameof(IdTipoEvento))]
-        public TipoEvento TipoEvento { get; set; }
+        public TipoEvento? TipoEvento { get; set; }
 
         //ref. tabela Instituicao = FK
 

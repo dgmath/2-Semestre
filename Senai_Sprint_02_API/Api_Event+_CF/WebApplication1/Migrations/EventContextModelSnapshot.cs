@@ -137,7 +137,7 @@ namespace webapi.@event.tarde.Migrations
 
             modelBuilder.Entity("webapi.event_tarde.Domains.Usuario", b =>
                 {
-                    b.Property<Guid>("Idusuario")
+                    b.Property<Guid>("IdUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -157,7 +157,7 @@ namespace webapi.@event.tarde.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("CHAR(60)");
 
-                    b.HasKey("Idusuario");
+                    b.HasKey("IdUsuario");
 
                     b.HasIndex("Email")
                         .IsUnique();
