@@ -12,6 +12,8 @@ namespace webapi.event_.tarde.Contexts
         public DbSet<Instituicao> Instituicao { get; set; }
         public DbSet<PresencaEvento> PresencaEventos { get; set; }
 
+        public DbSet<ComentarioEvento> ComentarioEvento { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server=NOTE15-S14; Database=event+_tarde; User Id = sa; Pwd = Senai@134; TrustServerCertificate=True;");

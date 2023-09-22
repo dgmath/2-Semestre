@@ -8,10 +8,10 @@ namespace webapi.event_.tarde.Interfaces
 
         void Deletar(Guid id);
 
-        List<TipoUsuario> Listar();
+        List<ComentarioEvento> Listar();
 
-        TipoUsuario BuscarPorId(Guid id);
+        ComentarioEvento BuscarPorId(Guid id);
 
-        void Atualizar(Guid id, Guid comentarioEvento);
+        void Atualizar(Guid id, ComentarioEvento comentarioEvento);
     }
 }

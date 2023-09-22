@@ -12,8 +12,8 @@ using webapi.event_.tarde.Contexts;
 namespace webapi.@event.tarde.Migrations
 {
     [DbContext(typeof(EventContext))]
-    [Migration("20230918202121_BD_v1")]
-    partial class BD_v1
+    [Migration("20230922183229_BD_v3")]
+    partial class BD_v3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,34 @@ namespace webapi.@event.tarde.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("webapi.event_tarde.Domains.ComentarioEvento", b =>
+                {
+                    b.Property<Guid>("IdComentarioEveto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Exibe")
+                        .HasColumnType("BIT");
+
+                    b.Property<Guid>("IdEvento")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdUsuario")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("IdComentarioEveto");
+
+                    b.HasIndex("IdEvento");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("ComentarioEvento");
+                });
 
             modelBuilder.Entity("webapi.event_tarde.Domains.Evento", b =>
                 {
@@ -140,7 +168,7 @@ namespace webapi.@event.tarde.Migrations
 
             modelBuilder.Entity("webapi.event_tarde.Domains.Usuario", b =>
                 {
-                    b.Property<Guid>("Idusuario")
+                    b.Property<Guid>("IdUsuario")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -160,7 +188,7 @@ namespace webapi.@event.tarde.Migrations
                         .HasMaxLength(60)
                         .HasColumnType("CHAR(60)");
 
-                    b.HasKey("Idusuario");
+                    b.HasKey("IdUsuario");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -168,6 +196,25 @@ namespace webapi.@event.tarde.Migrations
                     b.HasIndex("IdTipoUsuario");
 
                     b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("webapi.event_tarde.Domains.ComentarioEvento", b =>
+                {
+                    b.HasOne("webapi.event_tarde.Domains.Evento", "Evento")
+                        .WithMany()
+                        .HasForeignKey("IdEvento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapi.event_tarde.Domains.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Evento");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("webapi.event_tarde.Domains.Evento", b =>

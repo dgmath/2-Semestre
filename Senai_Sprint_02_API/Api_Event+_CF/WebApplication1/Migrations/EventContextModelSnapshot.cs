@@ -22,6 +22,34 @@ namespace webapi.@event.tarde.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("webapi.event_tarde.Domains.ComentarioEvento", b =>
+                {
+                    b.Property<Guid>("IdComentarioEveto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Exibe")
+                        .HasColumnType("BIT");
+
+                    b.Property<Guid>("IdEvento")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdUsuario")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("IdComentarioEveto");
+
+                    b.HasIndex("IdEvento");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("ComentarioEvento");
+                });
+
             modelBuilder.Entity("webapi.event_tarde.Domains.Evento", b =>
                 {
                     b.Property<Guid>("IdEvento")
@@ -165,6 +193,25 @@ namespace webapi.@event.tarde.Migrations
                     b.HasIndex("IdTipoUsuario");
 
                     b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("webapi.event_tarde.Domains.ComentarioEvento", b =>
+                {
+                    b.HasOne("webapi.event_tarde.Domains.Evento", "Evento")
+                        .WithMany()
+                        .HasForeignKey("IdEvento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapi.event_tarde.Domains.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Evento");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("webapi.event_tarde.Domains.Evento", b =>
