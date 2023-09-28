@@ -7,5 +7,7 @@ namespace Health_Clinic.Interfaces
         void Cadastrar(Usuario usuario);
 
         void Deletar(Guid id);
+
+        Usuario BuscarPorEmailSenha(string email, string senha);
     }
 }

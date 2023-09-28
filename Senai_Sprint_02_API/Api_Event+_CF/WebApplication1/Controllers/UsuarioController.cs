@@ -11,70 +11,70 @@ namespace webapi.event_.tarde.Controllers
     [Produces("application/json")]
     public class UsuarioController : ControllerBase
     {
-        private IUsuarioRepository _usuarioRepository { get; set; }
+            private IUsuarioRepository _usuarioRepository { get; set; }
 
-        public UsuarioController()
-        {
-            _usuarioRepository = new UsuarioRepository();
-        }
-
-        [HttpPost]
-        public IActionResult Post(Usuario usuario)
-        {
-            try
+            public UsuarioController()
             {
-                _usuarioRepository.Cadastrar(usuario);
+                _usuarioRepository = new UsuarioRepository();
+            }
 
-                return StatusCode(208);
-            }
-            catch (Exception e)
+            [HttpPost]
+            public IActionResult Post(Usuario usuario)
             {
+                try
+                {
+                    _usuarioRepository.Cadastrar(usuario);
 
-                return BadRequest(e.Message);
-            }
-        }
+                    return StatusCode(208);
+                }
+                catch (Exception e)
+                {
 
-        [HttpGet]
-        public IActionResult GetById(Guid id)
-        {
-            try
-            {
-                return Ok(_usuarioRepository.BuscarPorId(id));
+                    return BadRequest(e.Message);
+                }
             }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
 
-        [HttpGet("ListarTodos")]
-        public IActionResult Get()
-        {
-            try
+            [HttpGet]
+            public IActionResult GetById(Guid id)
             {
-                List<Usuario> listaUsuario = _usuarioRepository.Listar();
+                try
+                {
+                    return Ok(_usuarioRepository.BuscarPorId(id));
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
+            }
 
-                return Ok(listaUsuario);
-            }
-            catch (Exception)
+            [HttpGet("ListarTodos")]
+            public IActionResult Get()
             {
+                try
+                {
+                    List<Usuario> listaUsuario = _usuarioRepository.Listar();
 
-                return BadRequest();
-            }
-        }
+                    return Ok(listaUsuario);
+                }
+                catch (Exception)
+                {
 
-        [HttpGet("BuscarPorEmaileSenha")]
-        public IActionResult Get(string email,string senha)
-        {
-            try
-            {
-                return Ok(_usuarioRepository.BuscarPorEmailSenha(email, senha));
+                    return BadRequest();
+                }
             }
-            catch (Exception e)
+
+            [HttpGet("BuscarPorEmaileSenha")]
+            public IActionResult Get(string email,string senha)
             {
-                return BadRequest(e.Message);
+                try
+                {
+                    return Ok(_usuarioRepository.BuscarPorEmailSenha(email, senha));
+                }
+                catch (Exception e)
+                {
+                    return BadRequest(e.Message);
+                }
             }
-        }
 
     }
 }

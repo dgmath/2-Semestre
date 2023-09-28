@@ -16,5 +16,32 @@
         <member name="M:Health_Clinic.Migrations.BD_v1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Health_Clinic.Migrations.BD_v2">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Utils.Criptografia.GerarHash(System.String)">
+            <summary>
+            Gera uma Hash a partir da senha
+            </summary>
+            <param name="senha">Senha que receberá a hash</param>
+            <returns>Senha criptografada com a hash</returns>
+        </member>
+        <member name="M:Health_Clinic.Utils.Criptografia.CompararHash(System.String,System.String)">
+            <summary>
+            Verifica se a hash da senha informada e igual a hash salva no bd
+            </summary>
+            <param name="senhaForm"></param>
+            <param name="senhaBanco"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

@@ -25,8 +25,10 @@ namespace Health_Clinic.Domains
         [Required(ErrorMessage = "O RazaoSocial da Clinica é obrigatório!")]
         public string RazaoSocial { get; set; }
 
-        [Column(TypeName = "DATETIME")]
+        [Column(TypeName = "TIME")]
         [Required(ErrorMessage = "O HorarioFuncionamento da Clinica é obrigatório!")]
-        public DateTime HorarioFuncionamento { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = @"hh\:mm")]
+        public TimeSpan HorarioFuncionamento { get; set; }
     }
 }

@@ -74,10 +74,10 @@ namespace webapi.event_.tarde.Controllers
 
                 return Ok(listarMinhasPresencas);
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
 
