@@ -28,6 +28,54 @@
         <member name="M:Health_Clinic.Migrations.BD_v2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="T:Health_Clinic.Migrations.BD_v3">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v3.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v3.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v3.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Health_Clinic.Migrations.BD_v4">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v4.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v4.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v4.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Health_Clinic.Migrations.BD_v5">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v5.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v5.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v5.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Health_Clinic.Migrations.BD_v6">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v6.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v6.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Health_Clinic.Migrations.BD_v6.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="M:Health_Clinic.Utils.Criptografia.GerarHash(System.String)">
             <summary>
             Gera uma Hash a partir da senha

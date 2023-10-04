@@ -40,7 +40,7 @@ namespace Health_Clinic.Controllers
                 {
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email!),
                     new Claim(JwtRegisteredClaimNames.Jti,usuarioBuscado.IdUsuario.ToString()),
-                    new Claim(ClaimTypes.Role, usuarioBuscado.TipoUsuario!.Titulo!)
+                    new Claim(ClaimTypes.Role, usuarioBuscado.TipoUsuario!.Titulo!.ToString())
                 };
 
                 var Key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("projeto_Health_Clinic-webapi-key-autenticacao"));

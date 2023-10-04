@@ -1,6 +1,7 @@
 ﻿using Health_Clinic.Domains;
 using Health_Clinic.Interfaces;
 using Health_Clinic.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace Health_Clinic.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
+    //[Authorize]
     public class UsuarioController : ControllerBase
     {
         private IUsuarioRepository _usuarioRepository { get; set; }
@@ -19,6 +21,7 @@ namespace Health_Clinic.Controllers
         }
 
         [HttpPost]
+       // [Authorize(Roles = "Administrador")]
         public IActionResult Post(Usuario usuario)
         {
             try
@@ -36,6 +39,7 @@ namespace Health_Clinic.Controllers
 
 
         [HttpDelete("Deletar")]
+        //[Authorize(Roles = "Administrador")]
         public IActionResult Delete(Guid id)
         {
             try
@@ -50,6 +54,7 @@ namespace Health_Clinic.Controllers
         }
 
         [HttpGet("BuscarPorEmaileSenha")]
+        //[Authorize(Roles = "Administrador")]
         public IActionResult Get(string email, string senha)
         {
             try

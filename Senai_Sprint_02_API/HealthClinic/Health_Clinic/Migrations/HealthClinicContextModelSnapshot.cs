@@ -36,7 +36,10 @@ namespace Health_Clinic.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(100)");
 
-                    b.Property<TimeSpan>("HorarioFuncionamento")
+                    b.Property<TimeSpan>("HorarioAbertura")
+                        .HasColumnType("TIME");
+
+                    b.Property<TimeSpan>("HorarioFechamento")
                         .HasColumnType("TIME");
 
                     b.Property<string>("NomeFantasia")
@@ -61,10 +64,6 @@ namespace Health_Clinic.Migrations
                     b.Property<DateTime>("DataAgendamento")
                         .HasColumnType("DATETIME");
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(100)");
-
                     b.Property<Guid>("IdMedico")
                         .HasColumnType("uniqueidentifier");
 
@@ -75,7 +74,6 @@ namespace Health_Clinic.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Prontuario")
-                        .IsRequired()
                         .HasColumnType("VARCHAR(100)");
 
                     b.HasKey("IdConsulta");

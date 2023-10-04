@@ -1,6 +1,7 @@
 ﻿using Health_Clinic.Domains;
 using Health_Clinic.Interfaces;
 using Health_Clinic.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace Health_Clinic.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
+    //[Authorize]
     public class ConsultaController : ControllerBase
     {
         private IConsultaRepository _consultaRepository { get; set; }
@@ -19,6 +21,7 @@ namespace Health_Clinic.Controllers
         }
 
         [HttpPost("Cadastrar")]
+        //[Authorize(Roles = "Administrador")]
         public IActionResult Post(Consulta consulta)
         {
             try
@@ -33,6 +36,7 @@ namespace Health_Clinic.Controllers
         }
 
         [HttpDelete("Deletar")]
+        //[Authorize(Roles = "Administrador")]
         public IActionResult Delete(Guid id) 
         {
             try
@@ -47,6 +51,8 @@ namespace Health_Clinic.Controllers
         }
 
         [HttpPut("Atualizar")]
+        //[Authorize(Roles = "Administrador")]
+        //[Authorize(Roles = "Médico")]
         public IActionResult Put(Guid id, Consulta consulta) 
         {
             try

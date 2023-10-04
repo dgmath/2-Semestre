@@ -10,16 +10,11 @@ namespace Health_Clinic.Domains
         public Guid IdConsulta { get; set; }
 
         [Column(TypeName = "VARCHAR(100)")]
-        [Required(ErrorMessage = "Prontuario é obrigatório!")]
         public string? Prontuario { get; set; }
 
         [Column(TypeName = "DATETIME")]
         [Required(ErrorMessage = "A Data de Agendamento da Consulta é obrigatório!")]
         public DateTime DataAgendamento { get; set; }
-
-        [Column(TypeName = "VARCHAR(100)")]
-        [Required(ErrorMessage = "A Descrição é obrigatória!")]
-        public string? Descricao { get; set; }
 
         //ref. tabela Usuario = FK
 
