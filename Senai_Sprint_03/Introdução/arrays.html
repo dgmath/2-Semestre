@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let frutas = ['Banana', 'Uva', 'Manga'];//array vazio
+
+        console.log(frutas);
+        frutas.push('Seriguela');
+        frutas.push('Amora');
+
+        frutas.sort();//ordena os elementos em ordem alfabetica
+
+        // for (let index = 0; index < frutas.length; index++) {
+        //     console.log(`Fruta ${index+1}: ${frutas[index]}`);
+        // }
+
+        frutas.forEach(function(f, i){
+            console.log(`Fruta ${i+1}: ${f}`);
+        });
+
+    </script>
+</body>
+</html>

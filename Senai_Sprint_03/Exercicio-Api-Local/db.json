@@ -1,0 +1,12 @@
+{
+  "imc": [
+    {
+      "nome": "Math",
+      "altura": "1.68",
+      "peso": 60,
+      "situacao": "Ta Bem",
+      "imc": 22,
+      "id": 4
+    }
+  ]
+}

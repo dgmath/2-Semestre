@@ -9,7 +9,7 @@
 <body>
     <h1>Simple Calc</h1>
 
-    <form>
+    <form onsubmit="calcular()">
         <label for="numero1"></label>
         <input for="number" id="numero1" placeholder="Primeiro Número">
         <br><br>
@@ -26,71 +26,13 @@
             <option value="*">Multiplicação</option>
             <option value="/">Divisão</option>
         </select>
+        
+        <p>Resultado: <strong id="resultado">??</strong></p>
 
-        <button onclick="calcular()">Calcular</button>
+        <button>Calcular</button>
     </form>
 
-    <script>   
+    <script src="./Scripts/funcoes.js"></script>
 
-
-        function calcular()
-        {
-            event.preventDefault();
-            let n1 = parseFloat(document.getElementById("numero1").value);
-            let n2 = parseFloat(document.getElementById("numero2").value);
-            let res; // = n1 + n2
-            let op = document.getElementById("operacao").value;
-
-            
-            if (op == '+') {
-                res = somar(n1,n2);
-                console.log(`Resultado: ${res}`)
-            }
-            else if (op == '-')
-            {
-                res = subtrair(n1,n2)
-                console.log(`Resultado: ${res}`);
-            }
-            else if (op == '*') {
-                res = mult(n1,n2)
-                console.log(`Resultado: ${res}`)
-            }
-            else if (op == '/') {
-                res = div(n1,n2)
-                console.log(`Resultado: ${res}`)
-            }
-            else
-            {
-                alert(`Operação invalida! Insira uma das (+,-,*,/)`)
-            }
-            //let res = parseFloat(n1) + parseFloat(n2); Parse float espera uma string e retorna um number;
-
-            alert(`Resultado: ${res}`)
-
-            //let n3 = 50
-            
-            console.log(n1);
-            console.log(n2);
-            //console.log(n3);
-        }
-
-        function somar(x,y) {
-            return x + y;
-        }
-        
-        function subtrair(x,y) {
-            return x - y;
-        }
-
-        function mult(x,y)
-        {
-            return x * y;
-        }
-
-        function div(x,y)
-        {
-            return x / y;
-        }
-    </script>
 </body>
 </html>
