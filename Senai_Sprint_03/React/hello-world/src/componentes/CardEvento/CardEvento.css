@@ -1,0 +1,40 @@
+.card-evento{
+    display: flex;
+    width: 230px;
+    height: 230px;
+    flex-direction: column;
+    border: 2px solid #910125;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.card-evento__title{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.3rem;
+}
+
+.card-evento__text{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    text-align: center;
+}
+
+.card-evento__conect{
+    color: red;
+    font-weight: 700;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.card-evento__conect--disable{
+    cursor: not-allowed;
+}
+
+.card-evento__conect--disable:hover{
+    color: lightgray;
+}

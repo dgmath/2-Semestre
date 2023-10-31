@@ -1,38 +1,3 @@
 {
-  "contatos": [
-    {
-      "nome": "Matheus",
-      "sobrenome": "Dias",
-      "email": "math29@gmail.com",
-      "pais": "55",
-      "ddd": "11",
-      "telefone": "943705524",
-      "cep": "03918020",
-      "rua": "Alameda dos Contadores",
-      "complemento": "Casa 2",
-      "numero": "455",
-      "bairro": "Vila Bancária",
-      "cidade": "São Paulo",
-      "UF": "SP",
-      "anotacoes": "cfvev",
-      "id": 1
-    },
-    {
-      "nome": "Matheus",
-      "sobrenome": "Dias",
-      "email": "math29@gmail.com",
-      "pais": "55",
-      "ddd": "11",
-      "telefone": "943705524",
-      "cep": "03918020",
-      "rua": "Alameda dos Contadores",
-      "complemento": "Casa 2",
-      "numero": "455",
-      "bairro": "Vila Bancária",
-      "cidade": "São Paulo",
-      "UF": "SP",
-      "anotacoes": "Testando",
-      "id": 2
-    }
-  ]
+  "contatos": []
 }
