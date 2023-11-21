@@ -1,14 +1,24 @@
-import React from 'react';
 import './Input.css'
 
-const Input = () => {
+const Input = (props) => {//construtor
+    // const [meuValor, setMeuvalor] = useState();//Dado/estado de um componente,array em javascript funciona como um objeto propriedade(meuValor) e acessor(setMeuValor)
     return (
-            <input 
-                type="text" 
-                id='numero1'
-                name='numero1'
-                placeholder='Primeiro Nome'
+        <div>
+                <input 
+                type={props.type}
+                id={props.id}
+                name={props.name}
+                placeholder={props.placeholder} 
+                value={props.value}
+                onChange={(e)=>{//ao alterar ele é capturado e passsado, mudar valor
+                    
+                    //setMeuvalor(e.target.value)
+                    props.fnAltera(e.target.value)
+                    
+                }}
             />
+            <span>{props.value}</span>
+        </div>
     );
 };
 

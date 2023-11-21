@@ -1,14 +1,14 @@
-import React from 'react';
-import './LoginPage.css'
-import Header from '../../Components/Header/Header';
+import React from "react";
+import "./LoginPage.css";
+import Title from "../../Components/Title/Title";
+import MainContent from "../../Components/MainContent/MainContent";
 
 const LoginPage = () => {
-    return (
-        <div>
-            <Header />
-            <h1>Página de Login</h1>
-        </div>
-    );
+  return (
+    <MainContent>
+      <Title titleText={"Login"} />
+    </MainContent>
+  );
 };
 
 export default LoginPage;

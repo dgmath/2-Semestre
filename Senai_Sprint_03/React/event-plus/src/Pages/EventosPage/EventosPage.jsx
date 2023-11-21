@@ -1,14 +1,14 @@
-import React from 'react';
-import './EventosPage.css'
-import Header from '../../Components/Header/Header';
+import React from "react";
+import "./EventosPage.css";
+import Title from "../../Components/Title/Title";
+import MainContent from "../../Components/MainContent/MainContent";
 
 const EventosPage = () => {
-    return (
-        <div>
-            <Header />
-            <h1>Página de Eventos</h1>
-        </div>
-    );
+  return (
+    <MainContent>
+      <Title titleText={"Cadastro de Eventos"} />
+    </MainContent>
+  );
 };
 
 export default EventosPage;
