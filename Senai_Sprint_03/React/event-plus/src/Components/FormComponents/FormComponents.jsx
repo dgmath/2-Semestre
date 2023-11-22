@@ -1,6 +1,34 @@
 import React from 'react';
 import "./FormComponents.css"
 
+export const Select = ({
+    required,
+    id,
+    name,
+    options,
+    manipulationFunction,
+    additionalClass = "",
+    defaultValue
+}) => {
+    return (
+        <select 
+            name={name} 
+            id={id}
+            required={required}
+            className={`input-component ${additionalClass}`}
+            onChange={manipulationFunction}
+            value={defaultValue}
+
+        >
+            {/* <option value="">Selecione</option> */}
+            {options.map((o) =>{
+                return (
+                    <option key={Math.random()} value={o.value}>{o.text}</option>
+                );
+            })}
+        </select>
+    );
+}
 
 export const Input = ({
     type,

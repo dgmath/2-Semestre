@@ -43,7 +43,7 @@ const TipoEventoPage = () => {
           imgIcon: "danger",
           imgAlt:
             "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-          showMessage: true,
+          showMessage: true
         });
       }
 
@@ -57,9 +57,12 @@ const TipoEventoPage = () => {
 
   async function getState()
   {
-    const retornoGet = await api.get("/TiposEvento");
-    console.log(retornoGet.data);
-    setTipoEvento(retornoGet.data)
+    try {
+      const retornoGet = await api.get("/TiposEvento");
+      setTipoEvento(retornoGet.data)
+    } catch (error) {
+      alert("Algo deu Errado")
+    }
   }
   
   async function handleSubmit(e) {
@@ -79,7 +82,7 @@ const TipoEventoPage = () => {
         imgIcon: "success",
         imgAlt:
           "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-        showMessage: true,
+        showMessage: true
       }); 
       console.log(retorno.data);
       setTitulo("")
@@ -91,7 +94,7 @@ const TipoEventoPage = () => {
         imgIcon: "danger",
         imgAlt:
           "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-        showMessage: true,
+        showMessage: true
       });
     }
 
@@ -122,7 +125,7 @@ const TipoEventoPage = () => {
           imgIcon: "success",
           imgAlt:
             "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-          showMessage: true,
+          showMessage: true
         });
 
         setTitulo("")
@@ -137,7 +140,7 @@ const TipoEventoPage = () => {
           imgIcon: "danger",
           imgAlt:
             "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-          showMessage: true,
+          showMessage: true
         });
       }
     }
@@ -172,7 +175,7 @@ const TipoEventoPage = () => {
         imgIcon: "success",
         imgAlt:
           "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-        showMessage: true,
+        showMessage: true
       }); 
       getState();
     } catch (error) {
@@ -182,7 +185,7 @@ const TipoEventoPage = () => {
         imgIcon: "danger",
         imgAlt:
           "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-        showMessage: true,
+        showMessage: true
       });
     }
   };
