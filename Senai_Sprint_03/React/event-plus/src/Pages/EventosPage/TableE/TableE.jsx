@@ -2,10 +2,10 @@ import React from "react";
 import "./TableE.css";
 import editPen from "../../../Assets/images/edit-pen.svg"
 import trashDelete from "../../../Assets/images/trash-delete.svg"
-
+import { dateFormatDbToView } from "../../../Utils/stringFunction";
+import { Tooltip } from "react-tooltip";
 
 const TableE = ({dados, fnUpdate, fnDelete}) => {
-    console.log(dados);
 
   return (
     <table className="table-data">
@@ -38,19 +38,34 @@ const TableE = ({dados, fnUpdate, fnDelete}) => {
             {dados.map((e) => {
                 return(
                     //uma linha completa
-                    <tr className="table-data__head-row">
+                    <tr key={e.idEvento} className="table-data__head-row">
 
                     <td className="table-data__data table-data__data--big">
                       {e.nomeEvento}
                     </td>
-                      <td className="table-data__data table-data__data--little">
-                        {e.descricao}
+                      <td 
+                      className="table-data__data table-data__data--little">
+                        <p
+                          data-tooltip-id={e.idEvento}
+                          data-tooltip-content={e.descricao}
+                          data-tooltip-place="top"
+                        >
+                        <Tooltip id={e.idEvento} className="tootip"/>
+                        {e.descricao.substr(0, 16)}...
+                        </p>
                       </td>
                     <td className="table-data__data table-data__data--little">
-                      {e.tiposEvento.titulo}
+                      <p
+                          data-tooltip-id={e.idEvento}
+                          data-tooltip-content={e.tiposEvento.titulo}
+                          data-tooltip-place="top"
+                      >
+                      <Tooltip id={e.idEvento} className="tootip"/>
+                      {e.tiposEvento.titulo.substr(0, 16)}...
+                      </p>
                     </td>
                     <td className="table-data__data table-data__data--little">
-                      {new Date(e.dataEvento).toLocaleDateString()}
+                      {dateFormatDbToView(e.dataEvento)}
                     </td>
 
                     <td className="table-data__data table-data__data--little">

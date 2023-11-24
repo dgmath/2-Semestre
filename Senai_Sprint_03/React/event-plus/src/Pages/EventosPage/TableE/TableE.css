@@ -12,6 +12,13 @@
     src: url(../../../Assets/fonts/Poppins-Regular.ttf);
 }
 
+.tootip {
+    color: #fff !important;
+    background-color: #B51D44 !important;
+
+    z-index: 5000000000 !important;
+  }
+
 /* Smartphone */
 .table-data {
     /* table */
