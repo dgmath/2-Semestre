@@ -10,6 +10,8 @@ import TableE from "./TableE/TableE";
 import api from "../../Services/Service";
 import Notification from "../../Components/Notification/Notification";
 import { dateFormatDbToViewR } from "../../Utils/stringFunction";
+import Spinner from "../../Components/Spinner/Spinner"
+
 const EventosPage = () => {
 
   const [frmEdit, setFrmEdit] = useState(false)//boolean
@@ -22,6 +24,7 @@ const EventosPage = () => {
   const [notifyUser, setNotifyUser] = useState({});
   const [inst, setInst] = useState("");
   const [idEvento, setIdEvento] = useState(null);
+  const [showSpinner, setShowSpinner] = useState(false);
   //array indice 0 . inst[0].
 
 
@@ -29,13 +32,23 @@ const EventosPage = () => {
 
     async function getEventos() {
 
+      setShowSpinner(true);
+
       try {
         const retorno = await api.get("/Evento");
         console.log(retorno.data);
         setEvento(retorno.data)
       } catch (error) {
-        alert("Deu ruim na api")
+        setNotifyUser({
+          titleNote: "Atenção",
+          textNote: `Deu ruim na API`,
+          imgIcon: "danger",
+          imgAlt:
+            "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
+          showMessage: true
+        });
       }
+      setShowSpinner(false);
     }
     getEventos()
     
@@ -58,7 +71,14 @@ const EventosPage = () => {
         console.log("dhfsbjhfb");
         console.log(arrMold);
       } catch (error) {
-        alert("Deu ruim na api")
+        setNotifyUser({
+          titleNote: "Atenção",
+          textNote: `Deu ruim na API`,
+          imgIcon: "danger",
+          imgAlt:
+            "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
+          showMessage: true
+        });
       }
     }
     getTipoEvento()
@@ -68,7 +88,14 @@ const EventosPage = () => {
         const retorno = await api.get("/Instituicao")
         setInst(retorno.data[0].idInstituicao)
       } catch (error) {
-        alert("Deu ruim na api")
+        setNotifyUser({
+          titleNote: "Atenção",
+          textNote: `Deu ruim na API`,
+          imgIcon: "danger",
+          imgAlt:
+            "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
+          showMessage: true
+        });
       }
     }
     getInst()
@@ -233,6 +260,7 @@ async function handleUpdate(e)
   return (
     <MainContent>
       <Notification {...notifyUser} setNotifyUser={setNotifyUser}/>
+      {showSpinner ? <Spinner /> : null}
 
       <section className="cadastro-evento-section">
       <Container>
