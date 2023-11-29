@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import MainContent from "../../Components/MainContent/MainContent";
 import Banner from "../../Components/Banner/Banner";
 import VisionSection from "../../Components/VisionSection/VisionSection";
@@ -15,9 +15,12 @@ import "./HomePage.css";
 import { Pagination } from "swiper/modules";
 
 import api from "../../Services/Service";
+import { UserContext } from "../../Context/AuthContext";
 
 const HomePage = () => {
 
+  const {userData} = useContext(UserContext)
+  console.log(userData);
   useEffect(() => {
     async function getProximosEventos() {
       try {
