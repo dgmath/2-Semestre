@@ -51,7 +51,7 @@ const HomePage = () => {
 
           <div className="events-box">
             <Swiper
-              slidesPerView={ window.innerWidth >= 992 ? 3 : 1 }
+              slidesPerView={ window.innerWidth >= 992 ? 4 : 1 }
               spaceBetween={30}
               pagination={{
                 clickable: true,
