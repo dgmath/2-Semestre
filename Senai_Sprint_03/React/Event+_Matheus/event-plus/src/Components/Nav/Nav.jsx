@@ -36,7 +36,7 @@ const Nav = ( {setExibeNavbar , exibeNavbar} ) => {
                         (                   
                             <>
                             {/* Aluno */}
-                            <Link to="/eventos-aluno" className='navbar__item' onClick={() => {setExibeNavbar(false)}}>Eventos Aluno</Link>
+                            <Link to="/eventos-aluno" className='navbar__item' onClick={() => {setExibeNavbar(false)}}>Eventos</Link>
                             </>
                         )
                         : (
