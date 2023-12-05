@@ -9,7 +9,6 @@ import Spinner from "../../Components/Spinner/Spinner";
 import Modal from "../../Components/Modal/Modal";
 import api from "../../Services/Service";
 
-
 import "./EventosAlunoPage.css";
 import { UserContext } from "../../Context/AuthContext";
 
@@ -27,52 +26,51 @@ const EventosAlunoPage = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [notifyUser, setNotifyUser] = useState({});
+  const [toggle, setToggle] = useState(false);
 
   // recupera os dados globais do usuário
   const { userData, setUserData } = useContext(UserContext);
 
   useEffect(() => {
+    async function loadEventsType() {
+      setShowSpinner(true);
 
-      async function loadEventsType(){
+      //trazer todos os eventos
+      try {
+        if (tipoEvento === "1") {
+          const retorno = await api.get("/Evento");
+          const retornoM = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
 
-        setShowSpinner(true)
-
-        //trazer todos os eventos
-        try {
-            if (tipoEvento === "1") {
-
-                const retorno = await api.get("/Evento")
-                console.log(retorno.data);
-                setEventos(retorno.data)
-            }
-            else
-            {
-                let arrEventos = [];
-                const retornoM = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`)
-                console.log(retornoM);
-                retornoM.data.forEach((e) => {
-                    arrEventos.push(e.evento)
-                })
-                setEventos(arrEventos)
-            }
-
-            }
-            
-            catch (error) {
-                setNotifyUser({
-                    titleNote: "Atenção",
-                    textNote: `Deu ruim na API`,
-                    imgIcon: "danger",
-                    imgAlt:
-                      "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-                    showMessage: true
-                  });
-            };
+          const dadosMarcados = verificaPresenca(retorno.data,retornoM.data);
+          console.log("bla bla bla");
+          console.log(dadosMarcados);
+          console.log(retorno.data);
+          
+          setEventos(retorno.data);          
+        } else {
+          let arrEventos = [];
+          const retornoM = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
+          console.log(retornoM);
+          retornoM.data.forEach((e) => {
+            arrEventos.push({...e.evento, situacao : e.situacao});
+          });
+          setEventos(arrEventos);
+        }
+      } catch (error) {
+        setNotifyUser({
+          titleNote: "Atenção",
+          textNote: `Deu ruim na API`,
+          imgIcon: "danger",
+          imgAlt:
+            "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
+          showMessage: true,
+        });
+      }
     }
-    loadEventsType()
+    loadEventsType();
 
-setShowSpinner(false)
-  }, [tipoEvento]);
+    setShowSpinner(false);
+  }, [tipoEvento, userData.userId]);
 
   // toggle meus eventos ou todos os eventos
   function myEvents(tpEvent) {
@@ -91,6 +89,21 @@ setShowSpinner(false)
     alert("Remover o comentário");
   };
 
+  const verificaPresenca = (arrAllEvents, eventsUser) => {
+    for (let x = 0; x < arrAllEvents.length; x++) {
+
+      for (let i = 0; i < eventsUser.length; i++) {
+
+        if (arrAllEvents[x].idEvento === eventsUser[i].idEvento) {
+
+          arrAllEvents[x].situacao = true;
+
+          break;
+        }
+      }
+    }
+  };
+
   function handleConnect() {
     alert("Desenvolver a função conectar evento");
   }
@@ -100,7 +113,7 @@ setShowSpinner(false)
 
       <MainContent>
         <Container>
-          <Title titleText={"Eventos"} className="custom-title" />
+          <Title titleText={"Eventos"} additionalClass="custom-title" />
 
           <Select
             id="id-tipo-evento"
@@ -113,7 +126,7 @@ setShowSpinner(false)
           />
           <Table
             dados={eventos}
-            fnConnect={handleConnect}
+            fnConnect={verificaPresenca}
             fnShowModal={() => {
               showHideModal();
             }}

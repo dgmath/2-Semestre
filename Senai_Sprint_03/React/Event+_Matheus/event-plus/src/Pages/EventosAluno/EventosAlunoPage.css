@@ -11,6 +11,11 @@
     margin-top: 30px;
 }
 
+#id-tipo-evento
+{
+    cursor: pointer;
+}
+
 @media screen and (min-width: 992px){
     
     .select-tp-evento {

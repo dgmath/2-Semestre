@@ -123,6 +123,7 @@
     .comentary__icon-delete {
       width: 20px;
       height: 22px;
+      cursor: pointer;
     }
     .comentary__button {
       height: 54px;
