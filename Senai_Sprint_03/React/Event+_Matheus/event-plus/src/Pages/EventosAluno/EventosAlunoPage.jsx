@@ -32,45 +32,56 @@ const EventosAlunoPage = () => {
   const { userData, setUserData } = useContext(UserContext);
 
   useEffect(() => {
-    async function loadEventsType() {
-      setShowSpinner(true);
-
-      //trazer todos os eventos
-      try {
-        if (tipoEvento === "1") {
-          const retorno = await api.get("/Evento");
-          const retornoM = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
-
-          const dadosMarcados = verificaPresenca(retorno.data,retornoM.data);
-          console.log("bla bla bla");
-          console.log(dadosMarcados);
-          console.log(retorno.data);
-          
-          setEventos(retorno.data);          
-        } else {
-          let arrEventos = [];
-          const retornoM = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
-          console.log(retornoM);
-          retornoM.data.forEach((e) => {
-            arrEventos.push({...e.evento, situacao : e.situacao});
-          });
-          setEventos(arrEventos);
-        }
-      } catch (error) {
-        setNotifyUser({
-          titleNote: "Atenção",
-          textNote: `Deu ruim na API`,
-          imgIcon: "danger",
-          imgAlt:
-            "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
-          showMessage: true,
-        });
-      }
-    }
+    
     loadEventsType();
 
     setShowSpinner(false);
   }, [tipoEvento, userData.userId]);
+
+
+  async function loadEventsType() {
+    setShowSpinner(true);
+
+    //trazer todos os eventos
+    try {
+      if (tipoEvento === "1") {
+        const retorno = await api.get("/Evento");
+        const retornoM = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
+
+        const dadosMarcados = verificaPresenca(retorno.data,retornoM.data);
+        // console.log("bla bla bla");
+        console.log(dadosMarcados);
+        console.log(retorno.data);
+        
+        setEventos(retorno.data);          
+      } else {
+        let arrEventos = [];
+        const retornoM = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
+        console.log(retornoM);
+        retornoM.data.forEach((e) => {
+          arrEventos.push({
+            ...e.evento,
+            situacao : e.situacao,
+            idPresencaEvento: e.idPresencaEvento
+            });
+        });
+        setEventos(arrEventos);
+      }
+    } catch (error) {
+      setNotifyUser({
+        titleNote: "Atenção",
+        textNote: `Deu ruim na API`,
+        imgIcon: "danger",
+        imgAlt:
+          "Imagem de ilustração de sucesso. Moça segurando um balão com símbolo de confirmação ok.",
+        showMessage: true,
+      });
+    }
+        setShowSpinner(false);
+
+  }
+
+
 
   // toggle meus eventos ou todos os eventos
   function myEvents(tpEvent) {
@@ -78,16 +89,22 @@ const EventosAlunoPage = () => {
   }
 
   async function loadMyComentary(idComentary) {
-    return "????";
+    alert("Carregar o comentario")
   }
+
+  async function postMyComentary(idComentary) {
+    alert("Cadastrar o comentario")
+  }
+
+  const commentaryRemove = async () => {
+    alert("Remover o comentário");
+  };
 
   const showHideModal = () => {
     setShowModal(showModal ? false : true);
   };
 
-  const commentaryRemove = () => {
-    alert("Remover o comentário");
-  };
+
 
   const verificaPresenca = (arrAllEvents, eventsUser) => {
     for (let x = 0; x < arrAllEvents.length; x++) {
@@ -97,6 +114,7 @@ const EventosAlunoPage = () => {
         if (arrAllEvents[x].idEvento === eventsUser[i].idEvento) {
 
           arrAllEvents[x].situacao = true;
+          arrAllEvents[x].idPresencaEvento = eventsUser[i].idPresencaEvento;
 
           break;
         }
@@ -104,8 +122,52 @@ const EventosAlunoPage = () => {
     }
   };
 
-  function handleConnect() {
-    alert("Desenvolver a função conectar evento");
+  async function getState()
+  {
+    try {
+      const retornoGet = await api.get("/Evento");
+      const retorno = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
+      setEventos(retornoGet.data)
+    } catch (error) {
+      alert("Algo deu Errado")
+    }
+  }
+
+ async function handleConnect(idEvent, whatTheFunction, idPresencaEvento = null) {
+    // {
+    //   "situacao": true,
+    //   "idUsuario": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    //   "idEvento": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+    // }
+    if (whatTheFunction === "connect") {
+      try {
+        const retorno = await api.post(`/PresencasEvento`,
+        {
+          situacao: true,
+          idUsuario: userData.userId,
+          idEvento: idEvent
+        }
+        )
+        
+        loadEventsType();
+      } catch (error) {
+        console.log("Erro ao conectar");
+        console.log(error);
+      }
+      return;
+    }
+
+    //unconnect
+    try {
+      const retorno = await api.delete(`/PresencasEvento/${idPresencaEvento}`
+      )
+      console.log(retorno);
+      loadEventsType();
+    } catch (error) {
+      console.log("Erro ao conectar");
+      console.log(error);
+    }
+      // alert("Desconectar do evento" + idEvent);
   }
   return (
     <>
@@ -126,7 +188,7 @@ const EventosAlunoPage = () => {
           />
           <Table
             dados={eventos}
-            fnConnect={verificaPresenca}
+            fnConnect={handleConnect}
             fnShowModal={() => {
               showHideModal();
             }}
@@ -141,6 +203,8 @@ const EventosAlunoPage = () => {
         <Modal
           userId={userData.userId}
           showHideModal={showHideModal}
+          fnGet={loadMyComentary}
+          fnPost={postMyComentary}
           fnDelete={commentaryRemove}
         />
       ) : null}

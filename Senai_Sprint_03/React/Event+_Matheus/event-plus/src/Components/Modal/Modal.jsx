@@ -9,8 +9,9 @@ const Modal = ({
   comentaryText = "Não informado. Não informado. Não informado.",
   userId = null,
   showHideModal = false,
-  fnDelete = null,
-  fnNewCommentary = null
+  fnPost = null,
+  fnGet = null,
+  fnDelete = null
 
 }) => {
 
@@ -45,7 +46,7 @@ const Modal = ({
         <Button
           textButton="Comentar"
           additionalClass="comentary__button"
-          manipulationFunction={fnNewCommentary}
+          manipulationFunction={fnPost}
         />
       </article>
     </div>

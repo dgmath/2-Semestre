@@ -23,7 +23,10 @@ const Nav = ( {setExibeNavbar , exibeNavbar} ) => {
             </Link>
 
             <div className='navbar__items-box'>
-
+                    <>
+                         {/* Público */}
+                         <Link to="/" className='navbar__item' onClick={() => {setExibeNavbar(false)}}>Home</Link>
+                     </>
                 {userData.role === "Administrador" ? (
                     <>
                     
@@ -40,15 +43,9 @@ const Nav = ( {setExibeNavbar , exibeNavbar} ) => {
                             </>
                         )
                         : (
-                            <>
-                            {/* Público */}
-                            <Link to="/" className='navbar__item' onClick={() => {setExibeNavbar(false)}}>Home</Link>
-                            </>
+                            null
                         )
                         )}
-
-
-
                 {/* <Link to="/login" className='navbar__item' onClick={() => {setExibeNavbar(false)}}>Login</Link> */}
 
             </div>

@@ -19,7 +19,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get() 
+        public IActionResult Get()
         {
             try
             {
@@ -46,7 +46,7 @@ namespace webapi.event_.Controllers
         }
 
         [HttpGet("ListarMinhas/{id}")]
-        public IActionResult GetMyPresences(Guid id) 
+        public IActionResult GetMyPresences(Guid id)
         {
             try
             {
@@ -55,6 +55,21 @@ namespace webapi.event_.Controllers
             catch (Exception e)
             {
                 return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id) 
+        {
+            try
+            {
+                _presencasEventoRepository.Deletar(id);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+
             }
         }
 

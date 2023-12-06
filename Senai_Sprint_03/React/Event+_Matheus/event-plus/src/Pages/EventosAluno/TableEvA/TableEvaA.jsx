@@ -48,7 +48,16 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
                   onClick={fnShowModal}
                 />
 
-                <ToggleSwitch toggleActive={e.situacao} manipulationFunction={fnConnect} />
+                {/* Prop drilling onde passo uma prop para o pai pro filhob e para o neto, seria o fnconnect */}
+                <ToggleSwitch 
+                toggleActive={e.situacao}
+                 manipulationFunction={() => {
+                  fnConnect(
+                    e.idEvento,
+                    e.situacao ? "unconnect" : "connect",
+                    e.idPresencaEvento
+                  )
+                 }} />
               </td>
             </tr>
           );
