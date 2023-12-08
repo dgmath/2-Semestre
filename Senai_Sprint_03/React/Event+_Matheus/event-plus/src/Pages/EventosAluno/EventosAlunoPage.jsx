@@ -24,9 +24,12 @@ const EventosAlunoPage = () => {
 
   const [tipoEvento, setTipoEvento] = useState("1"); //código do tipo do Evento escolhido
   const [showSpinner, setShowSpinner] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState([]);
   const [notifyUser, setNotifyUser] = useState({});
   const [toggle, setToggle] = useState(false);
+
+  const [comentario, setComentario] = useState("Sem comentario");
+  const [idEvento, setIdEvento] = useState("");
 
   // recupera os dados globais do usuário
   const { userData, setUserData } = useContext(UserContext);
@@ -81,27 +84,59 @@ const EventosAlunoPage = () => {
 
   }
 
-
-
   // toggle meus eventos ou todos os eventos
   function myEvents(tpEvent) {
     setTipoEvento(tpEvent);
   }
 
-  async function loadMyComentary(idComentary) {
-    alert("Carregar o comentario")
+  async function loadMyComentary(idEvent) {
+    try {
+      console.log("Entrei na função");
+      const retorno = await api.get(`/Comentarios/BuscarPorIdUsuario?idUsuario=${userData.userId}&idEvento=${idEvent}`)
+
+      console.log({
+        idUsuario: userData.userId,
+        idEvento: idEvent,
+      });
+      console.log(retorno);
+
+      console.log(`/Comentarios/BuscarPorIdUsuario?idUsuario=${userData.userId}&idEvento${idEvent}`);
+
+      
+      setComentario(retorno.data.descricao)
+    } catch (error) {
+      // alert("erro")
+      console.log(error.message);
+    }
   }
 
-  async function postMyComentary(idComentary) {
-    alert("Cadastrar o comentario")
+  async function postMyComentary(comentario ,idEvent , idComentary = null) {
+    try {
+      const retorno = await api.post(`/Comentarios`, {
+        descricao: comentario,
+        exibe: true,
+        idUsuario: userData.userId,
+        idEvento: idEvent
+      })
+    } catch (error) {
+      alert("erro");
+      console.log(error.message);
+    }
   }
 
   const commentaryRemove = async () => {
     alert("Remover o comentário");
   };
 
-  const showHideModal = () => {
+  //vem da imagem
+  const showHideModal = (idEvent) => {
+      
     setShowModal(showModal ? false : true);
+    setIdEvento(idEvent)
+    // get
+    loadMyComentary(idEvent)
+    // colocar no state
+
   };
 
 
@@ -122,16 +157,7 @@ const EventosAlunoPage = () => {
     }
   };
 
-  async function getState()
-  {
-    try {
-      const retornoGet = await api.get("/Evento");
-      const retorno = await api.get(`/PresencasEvento/ListarMinhas/${userData.userId}`);
-      setEventos(retornoGet.data)
-    } catch (error) {
-      alert("Algo deu Errado")
-    }
-  }
+
 
  async function handleConnect(idEvent, whatTheFunction, idPresencaEvento = null) {
     // {
@@ -189,9 +215,8 @@ const EventosAlunoPage = () => {
           <Table
             dados={eventos}
             fnConnect={handleConnect}
-            fnShowModal={() => {
-              showHideModal();
-            }}
+            fnShowModal={
+              showHideModal}
           />
         </Container>
       </MainContent>
@@ -203,9 +228,13 @@ const EventosAlunoPage = () => {
         <Modal
           userId={userData.userId}
           showHideModal={showHideModal}
-          fnGet={loadMyComentary}
+          fnGet={() => {
+            loadMyComentary(idEvento)
+          }}
           fnPost={postMyComentary}
           fnDelete={commentaryRemove}
+          comentaryText={comentario}
+          idEvento={idEvento}
         />
       ) : null}
     </>

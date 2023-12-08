@@ -28,7 +28,12 @@ namespace webapi.event_.Contexts
         /// <param name="optionsBuilder">Objeto com as configurações definidas</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=NOTE16-S15; Database=event+_matheus; User Id=sa; Pwd=Senai@134; TrustServerCertificate=true;");
+            //string de conexão local, ssms
+            //optionsBuilder.UseSqlServer("Server=NOTE16-S15; Database=event+_matheus; User Id=sa; Pwd=Senai@134; TrustServerCertificate=true;");
+
+            //string de conexão Sql DataBase Azure
+            optionsBuilder.UseSqlServer(" Server=tcp:eventmatheusd-server.database.windows.net,1433;Initial Catalog=eventMatheusDatabase;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;User Id = eventmatheusd-server; pwd = Senai@134");
+
             base.OnConfiguring(optionsBuilder);
         }
     }

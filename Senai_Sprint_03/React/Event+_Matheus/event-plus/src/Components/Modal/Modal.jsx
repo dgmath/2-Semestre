@@ -7,13 +7,17 @@ import "./Modal.css";
 const Modal = ({
   modalTitle = "Feedback",
   comentaryText = "Não informado. Não informado. Não informado.",
-  userId = null,
+  idEvento = null,
   showHideModal = false,
   fnPost = null,
   fnGet = null,
   fnDelete = null
 
 }) => {
+
+
+  console.log("IdEvento");
+  console.log(idEvento);
 
   return (
     <div className="modal">
