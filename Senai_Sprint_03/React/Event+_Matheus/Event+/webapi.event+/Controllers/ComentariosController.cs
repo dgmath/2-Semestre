@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.CognitiveServices.ContentModerator;
+using System.Text;
 using webapi.event_.Domains;
 using webapi.event_.Interfaces;
 using webapi.event_.Repositories;
@@ -10,7 +12,71 @@ namespace webapi.event_.Controllers
     [ApiController]
     public class ComentariosController : ControllerBase
     {
+        //acesso aos métodos do repositório
         ComentariosEventoRepository comentario = new ComentariosEventoRepository();
+
+        //armazena dados da api externa
+        private readonly ContentModeratorClient _contentModeratorClient;
+
+        public ComentariosController(ContentModeratorClient contentModeratorClient)
+        {
+            _contentModeratorClient = contentModeratorClient;
+        }
+
+
+        [HttpPost("PostWithIA")]
+        public async Task<IActionResult> PostIA(ComentariosEvento comentariosEvento)
+        {
+            try
+            {
+                //Validação: se a descrição do comentário não for passado no objeto
+                if (string.IsNullOrEmpty(comentariosEvento.Descricao))
+                {
+                    return BadRequest("O texto validado não pode se encontrar como vazio!");
+                }
+
+                //converte a descrição do comentário em um MemoryStream (transmissão)
+                using var stream = new MemoryStream(Encoding.UTF8.GetBytes(comentariosEvento.Descricao));
+
+                //Realiza a moderação do conteúdo (descrição do comentário)
+                var moderationResult = await _contentModeratorClient.TextModeration
+                    .ScreenTextAsync("text/plain", stream,"por", false, false, null, true);
+
+                //se existir termos ofensivos
+                if (moderationResult.Terms != null)
+                {
+                    //atribuir false para exibe
+                    comentariosEvento.Exibe = false;
+
+                    //cadastra o comentário
+                    comentario.Cadastrar(comentariosEvento);
+                }
+                else
+                {
+                    comentariosEvento.Exibe = true;
+
+                    comentario.Cadastrar(comentariosEvento);
+                }
+                return StatusCode(201, comentariosEvento);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("ListarSomenteExibe")]
+        public IActionResult GetIA()
+        {
+            try
+            {
+                return Ok(comentario.ListarSomenteExibe());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         [HttpGet]
         public IActionResult Get(Guid id) 

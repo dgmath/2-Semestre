@@ -1300,3 +1300,6 @@ C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_03\React\Event+_Matheus\Eve
 C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_03\React\Event+_Matheus\Event+\webapi.event+\obj\Debug\net7.0\webapi.event+.pdb
 C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_03\React\Event+_Matheus\Event+\webapi.event+\obj\Debug\net7.0\webapi.event+.genruntimeconfig.cache
 C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_03\React\Event+_Matheus\Event+\webapi.event+\obj\Debug\net7.0\ref\webapi.event+.dll
+C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_03\React\Event+_Matheus\Event+\webapi.event+\bin\Debug\net7.0\Microsoft.Azure.CognitiveServices.ContentModerator.dll
+C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_03\React\Event+_Matheus\Event+\webapi.event+\bin\Debug\net7.0\Microsoft.Rest.ClientRuntime.dll
+C:\Users\53025781823\Desktop\2-Semestre\Senai_Sprint_03\React\Event+_Matheus\Event+\webapi.event+\bin\Debug\net7.0\Microsoft.Rest.ClientRuntime.Azure.dll
