@@ -26,6 +26,7 @@ const Nav = ( {setExibeNavbar , exibeNavbar} ) => {
                     <>
                          {/* Público */}
                          <Link to="/" className='navbar__item' onClick={() => {setExibeNavbar(false)}}>Home</Link>
+                         <Link to="/detalhes-evento/:idEvento" className='navbar__item' onClick={() => {setExibeNavbar(false)}}>Detalhes</Link>
                      </>
                 {userData.role === "Administrador" ? (
                     <>

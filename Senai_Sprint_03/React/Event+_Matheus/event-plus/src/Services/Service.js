@@ -7,7 +7,7 @@ const externalUrlApi = `https://eventmatheus.azurewebsites.net/api`;
 
 
 const api = axios.create({
-    baseURL : externalUrlApi
+    baseURL : localApi
 });
 
 export default api;
