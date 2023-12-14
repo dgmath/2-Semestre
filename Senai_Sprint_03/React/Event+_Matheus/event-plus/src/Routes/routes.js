@@ -9,7 +9,7 @@ import LoginPage from "../Pages/LoginPage/LoginPage";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import { PrivateRoute } from "./PrivateRoute";
-import EventosAlunoPage from "../Pages/EventosAluno/EventosAlunoPage";
+import EventosAlunoPage from "../Pages/EventosAlunoPage/EventosAlunoPage";
 import DetalhesEvento from "../Pages/DetalhesEvento/DetalhesEvento";
 
 const Rotas = () => {

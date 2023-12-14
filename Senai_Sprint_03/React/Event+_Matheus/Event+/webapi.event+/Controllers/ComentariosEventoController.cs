@@ -10,7 +10,7 @@ namespace webapi.event_.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ComentariosController : ControllerBase
+    public class ComentariosEventoController : ControllerBase
     {
         //acesso aos métodos do repositório
         ComentariosEventoRepository comentario = new ComentariosEventoRepository();
@@ -18,7 +18,7 @@ namespace webapi.event_.Controllers
         //armazena dados da api externa
         private readonly ContentModeratorClient _contentModeratorClient;
 
-        public ComentariosController(ContentModeratorClient contentModeratorClient)
+        public ComentariosEventoController(ContentModeratorClient contentModeratorClient)
         {
             _contentModeratorClient = contentModeratorClient;
         }

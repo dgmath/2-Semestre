@@ -1,11 +1,10 @@
 import React from "react";
 import comentaryIcon from "../../../Assets/images/comentary-icon.svg";
-import trashDelete from "../../../Assets/images/trash-delete.svg";
 import { dateFormatDbToView } from "../../../Utils/stringFunction";
 import ToggleSwitch from "../../../Components/Toggle/Toggle";
 // importa a biblioteca de tootips ()
-import "react-tooltip/dist/react-tooltip.css";           
-import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
+// import { Tooltip } from "react-tooltip";
 
 // import trashDelete from "../../../assets/images/trash-delete.svg";
 import "./TableEvA.css";
@@ -33,33 +32,41 @@ const Table = ({ dados, fnConnect = null, fnShowModal = null }) => {
               <td className="tbal-data__data tbal-data__data--big">
                 {e.nomeEvento}
               </td>
-              
+
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
                 {/* {e.dataEvento} */}
                 {dateFormatDbToView(e.dataEvento)}
               </td>
 
               <td className="tbal-data__data tbal-data__data--big tbal-data__btn-actions">
-                <img
-                  className="tbal-data__icon"
-
-                  src={comentaryIcon}
-                  alt=""
-                  onClick={() => {
-                    fnShowModal(e.idEvento)
-                  }}
+                {/* imagem do comentário - abre o modal */}
+                {new Date(e.dataEvento) < Date.now() ? (
+                  <img
+                    className="tbal-data__icon"
+                    // idevento={e.idEvento}
+                    src={comentaryIcon}
+                    alt=""
+                    onClick={() => {
+                      fnShowModal(e.idEvento);
+                    }}
+                  />
+                ) : null}
+                <ToggleSwitch
+                  toggleActive={e.situacao}
+                  manipulationFunction={
+                    new Date(e.dataEvento) > Date.now()
+                      ? () => {
+                          fnConnect(
+                            e.idEvento,
+                            e.situacao ? "unconnect" : "connect",
+                            e.idPresencaEvento //parâmetro opcional
+                          );
+                        }
+                      : () => {
+                          alert("Evento não está mais disponível");
+                        }
+                  }
                 />
-
-                {/* Prop drilling onde passo uma prop para o pai pro filhob e para o neto, seria o fnconnect */}
-                <ToggleSwitch 
-                toggleActive={e.situacao}
-                 manipulationFunction={() => {
-                  fnConnect(
-                    e.idEvento,
-                    e.situacao ? "unconnect" : "connect",
-                    e.idPresencaEvento
-                  )
-                 }} />
               </td>
             </tr>
           );

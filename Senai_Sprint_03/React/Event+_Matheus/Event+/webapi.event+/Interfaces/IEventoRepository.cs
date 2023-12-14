@@ -9,7 +9,7 @@ namespace webapi.event_.Interfaces
         List<Evento> Listar();
         List<Evento> ListarProximos();
         List<Evento> ListarAnteriores();
-        Evento BuscarPorId(Guid id);
+        List<Evento> BuscarPorId(Guid id);
         void Atualizar(Guid id, Evento evento);
     }
 }

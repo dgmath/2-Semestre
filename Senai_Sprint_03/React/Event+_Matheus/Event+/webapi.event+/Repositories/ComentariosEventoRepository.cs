@@ -100,7 +100,7 @@ namespace webapi.event_.Repositories
                             NomeEvento = c.Evento!.NomeEvento,
                         }
 
-                    }).Where(c => c.IdEvento == id) .ToList();
+                    }).Where(c => c.IdEvento == id).ToList();
             }
             catch (Exception)
             {

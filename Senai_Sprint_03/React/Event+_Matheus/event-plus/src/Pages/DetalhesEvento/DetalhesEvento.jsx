@@ -7,27 +7,38 @@ import { useParams } from 'react-router-dom';
 
 
 
-// const [comentario, setComentario] = useState([]);
-// const [comentarioIa, setComentarioIa] = useState([]);
+
 
 
 
 const DetalhesEvento = () => {
+    const [comentario, setComentario] = useState([]);
+    const [comentarioIa, setComentarioIa] = useState([]);
+    const [evento, setEvento] = useState();
 
     const {idEvento} = useParams()
     useEffect(()=> {
-        // const retornoComum = api.get("/Comentarios");
-        // const retornoIa = api.get("/Comentarios/ListarSomenteExibe");
-    
-        // console.log(retornoComum.data);
-        // console.log(retornoIa.data);
-        // setComentario(retornoComum.data)
-        // setComentarioIa(retornoIa.data)
-        // console.log(retornoEvento.data);
-        // setEvento(retornoEvento.data)
+        async function getEventos() {
+            try {
+                const retornoEvento = await api.get(`/Evento/${idEvento}`)
+                const retornoComum = await api.get("/Comentarios");
+                const retornoIa = await api.get("/Comentarios/ListarSomenteExibe");
+            
+                console.log(retornoComum.data);
+                console.log(retornoIa.data);
+                setComentario(retornoComum.data)
+                setComentarioIa(retornoIa.data)
+                setEvento(retornoEvento.data)
+                console.log(retornoEvento.data);
+            } catch (error) {
+                alert("deu ruim")
+            }
+        }
+        getEventos()
+        
     },[])
     
-    const [evento, setEvento] = useState([]);
+
 
 
 
@@ -37,6 +48,7 @@ const DetalhesEvento = () => {
         <MainContent>
             <Title titleText={"Comentarios do evento"}/>
             <p> id do evento: {idEvento}</p>
+            {/* {evento.nomeEvento} */}
         </MainContent>
     );
 };
