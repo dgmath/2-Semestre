@@ -10,29 +10,10 @@
     "version": "v1"
   },
   "paths": {
-    "/api/Comentarios": {
-      "get": {
-        "tags": [
-          "Comentarios"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "id",
-            "type": "string",
-            "format": "uuid",
-            "collectionFormat": "multi"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
+    "/api/ComentariosEvento/PostWithIA": {
       "post": {
         "tags": [
-          "Comentarios"
+          "ComentariosEvento"
         ],
         "consumes": [
           "application/json-patch+json",
@@ -56,10 +37,77 @@
         }
       }
     },
-    "/api/Comentarios/BuscarPorIdUsuario": {
+    "/api/ComentariosEvento/ListarSomenteExibe": {
       "get": {
         "tags": [
-          "Comentarios"
+          "ComentariosEvento"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ComentariosEvento": {
+      "get": {
+        "tags": [
+          "ComentariosEvento"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "collectionFormat": "multi"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ComentariosEvento"
+        ],
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ComentariosEvento"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/ComentariosEvento/BuscarPorIdUsuario": {
+      "get": {
+        "tags": [
+          "ComentariosEvento"
         ],
         "parameters": [
           {
@@ -84,10 +132,10 @@
         }
       }
     },
-    "/api/Comentarios/{id}": {
+    "/api/ComentariosEvento/{id}": {
       "delete": {
         "tags": [
-          "Comentarios"
+          "ComentariosEvento"
         ],
         "parameters": [
           {
@@ -143,6 +191,18 @@
       }
     },
     "/api/Evento/ListarProximos": {
+      "get": {
+        "tags": [
+          "Evento"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Evento/ListarAnteriores": {
       "get": {
         "tags": [
           "Evento"
